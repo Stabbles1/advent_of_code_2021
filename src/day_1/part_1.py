@@ -1,4 +1,4 @@
-with open("input", 'r') as f:
+with open("src/day_1/input", 'r') as f:
     measurements = [int(measurement) for measurement in f.read().splitlines()]
 
 

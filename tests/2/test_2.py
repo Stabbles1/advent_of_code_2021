@@ -1,4 +1,4 @@
-from submarine import Submarine
+from day_2.submarine import Submarine
 
 
 def test_with_sample_data():
