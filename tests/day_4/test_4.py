@@ -1,5 +1,5 @@
 from day_4.grid import Grid
-from day_4.part_1 import construct_grids, score_of_winning_board
+from day_4.part_1_and_2 import construct_grids, score_of_winning_board, score_of_losing_board
 
 called_numbers = [7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1]
 
@@ -64,3 +64,6 @@ def test_find_score_of_winning_board():
     grids = construct_grids(raw_grids)
     assert score_of_winning_board(grids, called_numbers) == 4512
     
+def test_find_score_of_losing_board():
+    grids = construct_grids(raw_grids)
+    assert score_of_losing_board(grids, called_numbers) == 1924
