@@ -13,11 +13,9 @@ def construct_grids(raw_grids):
 
 def score_of_winning_board(grids: List[Grid], called_numbers: List[int]):
     for number in called_numbers:
-        print(number)
         for grid in grids:
             grid.mark_number(number)
             if grid.solved:
-                print(grid.squares)
                 return grid.score
 
 called_numbers = file_to_int_list("src/day_4/input_called_numbers")
