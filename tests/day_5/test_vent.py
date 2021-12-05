@@ -34,4 +34,6 @@ def test_vertical_vent_can_calculate_its_own_coordinates():
 def test_diagonal_vent_can_calculate_its_own_coordinates():
     vent = Vent(5, 9, 9, 13)
     assert vent.calculate_all_coordinates() == ["5,9", "6,10", "7,11", "8,12", "9,13"]
-    inverse_vent = Vent(9, 13, 5, 9)
+
+    another_one = Vent(8, 0, 0, 8)
+    assert another_one.calculate_all_coordinates() == ["8,0", "7,1", "6,2", "5,3", "4,4", "3,5", "2,6", "1,7", "0,8"]

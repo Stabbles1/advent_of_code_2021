@@ -10,6 +10,8 @@ class Map:
 
     def advent(self, vent: Vent):
         for coordinate in vent.calculate_all_coordinates():
+            if coordinate == "0,0":
+                print(f"Found him {vent} and his coordinates {vent.calculate_all_coordinates()}")
             if coordinate in self.vent_locations:
                 self.vent_locations[coordinate] += 1
             else:

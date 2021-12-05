@@ -16,6 +16,8 @@ class Vent:
         coordinates = []
         x_delta = self.x1 - self.x2
         y_delta = self.y1 - self.y2
+        x_direction = 1 if self.x1 < self.x2 else -1
+        y_direction = 1 if self.y1 < self.y2 else -1
         if x_delta == 0:
             for y in range(min(self.y1, self.y2), max(self.y1, self.y2) + 1):
                 coordinates.append(f"{self.x1},{y}")
@@ -23,6 +25,18 @@ class Vent:
             for x in range(min(self.x1, self.x2), max(self.x1, self.x2) + 1):
                 coordinates.append(f"{x},{self.y1}")
         else:
-            for x, y in zip(range(min(self.x1, self.x2), max(self.x1, self.x2) + 1), range(min(self.y1, self.y2), max(self.y1, self.y2) + 1)):
-                coordinates.append(f"{x},{y}")
+            if x_direction == 1:
+                if y_direction == 1:
+                    for x, y in zip(range(self.x1, self.x2 + 1, x_direction), range(self.y1, self.y2 + 1, y_direction)):
+                        coordinates.append(f"{x},{y}")
+                else:
+                    for x, y in zip(range(self.x1, self.x2 + 1, x_direction), range(self.y1, self.y2 - 1, y_direction)):
+                        coordinates.append(f"{x},{y}")
+            else:
+                if y_direction == 1:
+                    for x, y in zip(range(self.x1, self.x2 - 1, x_direction), range(self.y1, self.y2 + 1, y_direction)):
+                        coordinates.append(f"{x},{y}")
+                else:
+                    for x, y in zip(range(self.x1, self.x2 - 1, x_direction), range(self.y1, self.y2 - 1, y_direction)):
+                        coordinates.append(f"{x},{y}")
         return coordinates

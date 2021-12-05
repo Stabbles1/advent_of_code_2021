@@ -23,7 +23,6 @@ if __name__ == "__main__":
     
     map = Map()
     for vent in vents:
-        if not vent.is_diagonal:
-            map.advent(vent)
+        map.advent(vent)
     
     print(len(map.dangerous_coordinates(danger_threshold=2)))
