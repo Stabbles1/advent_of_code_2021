@@ -24,6 +24,7 @@ def test_input_to_vents():
     assert vents[1].x2 == 0
     assert vents[1].y2 == 8
 
+
 def test_part_1_solution():
     vents = input_to_vents(sample_input)
     map = Map()
@@ -32,11 +33,10 @@ def test_part_1_solution():
             map.advent(vent)
     assert len(map.dangerous_coordinates(danger_threshold=2)) == 5
 
+
 def test_part_2_solution():
     vents = input_to_vents(sample_input)
     map = Map()
     for vent in vents:
         map.advent(vent)
-    
-    print(map.dangerous_coordinates(danger_threshold=2))
     assert len(map.dangerous_coordinates(danger_threshold=2)) == 12
