@@ -2,7 +2,6 @@ from day_8.puzzle import Puzzle
 from day_8.puzzle2 import Puzzle2
 from day_8.main import (
     input_to_puzzles,
-    input_to_puzzles2,
     count_output_value_occurrences,
     add_all_outputs,
 )
@@ -22,7 +21,7 @@ test_input = [
 
 
 def test_part_1():
-    puzzles = input_to_puzzles(test_input)
+    puzzles = input_to_puzzles(test_input, Puzzle)
     occurrences = count_output_value_occurrences(
         puzzles=puzzles, interesting_numbers=[1, 4, 7, 8]
     )
@@ -31,7 +30,7 @@ def test_part_1():
 
 
 def test_part_2():
-    puzzles2 = input_to_puzzles2(test_input)
+    puzzles2 = input_to_puzzles(test_input, Puzzle2)
     total = add_all_outputs(puzzles2)
 
     assert total == 61229

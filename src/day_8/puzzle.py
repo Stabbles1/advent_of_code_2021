@@ -3,12 +3,15 @@ from digit import Digit
 
 
 class Puzzle:
-    """ Represents a single line of the input, the left and right
+    """Represents a single line of the input, the left and right
     sides of the puzzle are passed in as separate arguments"""
+
     def __init__(self, clues, readings):
         self.raw_clues = clues
         self.clues: List[Digit] = [Digit(characters) for characters in clues.split(" ")]
-        self.readings: List[Digit] = [Digit(characters) for characters in readings.split(" ")]
+        self.readings: List[Digit] = [
+            Digit(characters) for characters in readings.split(" ")
+        ]
         self.possibilities = {
             letter: ["a", "b", "c", "d", "e", "f", "g"] for letter in "abcdefg"
         }
@@ -44,14 +47,13 @@ class Puzzle:
                     self.submit_possibilities(letter, length_decoder[len(digit)])
         return
 
-
     def eliminate_based_on_commonality(self):
         commonality_decoder = {
-            8: ['a', 'c'],
-            6: ['b'],
-            7: ['d', 'g'],
-            4: ['e'],
-            9: ['f'],
+            8: ["a", "c"],
+            6: ["b"],
+            7: ["d", "g"],
+            4: ["e"],
+            9: ["f"],
         }
         for letter in "abcdefg":
             count = self.raw_clues.count(letter)
@@ -65,7 +67,6 @@ class Puzzle:
                     for encoded_inner, decoded_inner in self.possibilities.items():
                         if [letter] == decoded_inner:
                             self.possibilities[encoded].remove(decoded_inner[0])
-
 
     def submit_possibilities(self, letter: str, options: List[str]):
         for remaining_letters in list(self.possibilities[letter]):

@@ -4,7 +4,6 @@ from puzzle import Puzzle
 
 
 class Puzzle2(Puzzle):
-
     def get_decoded_readings(self) -> int:
         self.run_eliminations()
         decoded_readings = ""
@@ -24,14 +23,13 @@ class Puzzle2(Puzzle):
                     self.submit_possibilities(letter, length_decoder[len(digit)])
         return
 
-
     def eliminate_based_on_commonality(self):
         commonality_decoder = {
-            8: ['d', 'a'],
-            6: ['e'],
-            7: ['f', 'c'],
-            4: ['g'],
-            9: ['b'],
+            8: ["d", "a"],
+            6: ["e"],
+            7: ["f", "c"],
+            4: ["g"],
+            9: ["b"],
         }
         for letter in "abcdefg":
             count = self.raw_clues.count(letter)
