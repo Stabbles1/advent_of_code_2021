@@ -14,13 +14,23 @@ class Puzzle:
         }
 
     def get_decoded_readings(self) -> List[int]:
-        self.eliminate_based_on_length()
-        self.eliminate_based_on_commonality()
-        self.eliminate_based_on_already_known()
+        self.run_eliminations()
         decoded_readings = []
         for digit in self.readings:
             decoded_readings.append(digit.characters_to_int(self.possibilities))
         return decoded_readings
+
+    def get_decoded_readings_pt2(self) -> int:
+        self.run_eliminations()
+        decoded_readings = ""
+        for digit in self.readings:
+            decoded_readings += str((digit.characters_to_int_pt_2(self.possibilities)))
+        return int(decoded_readings)
+
+    def run_eliminations(self):
+        self.eliminate_based_on_length()
+        self.eliminate_based_on_commonality()
+        self.eliminate_based_on_already_known()
 
     def eliminate_based_on_length(self):
         length_decoder = {
@@ -61,4 +71,3 @@ class Puzzle:
         for remaining_letters in list(self.possibilities[letter]):
             if remaining_letters not in options:
                 self.possibilities[letter].remove(remaining_letters)
-
