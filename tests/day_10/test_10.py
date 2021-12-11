@@ -36,12 +36,6 @@ def test_part_1():
     assert (program.calculate_corrupt_score()) == 26397
 
 
-def test_program_can_remove_corrupt_lines():
-    program = input_to_program(test_input)
-    program.remove_corrupt_lines()
-    assert len(program.chunk_lines) == 5
-
-
 def test_chunk_line_can_complete_sequence():
     incomplete_line = ChunkLine("[({(<(())[]>[[{[]{<()<>>")
     assert incomplete_line.get_completion_sequence() == "}}]])})]"

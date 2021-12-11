@@ -26,14 +26,8 @@ class Program:
 
     def calculate_incomplete_score(self):
         # By taking the median of all scores in the program
-        self.remove_corrupt_lines()
         scores = []
-        for line in self.chunk_lines:
+        for line in [l for l in self.chunk_lines if not l.is_corrupt()]:
             scores.append(line.completion_score())
         scores.sort()
         return scores[int(len(scores) / 2)]
-
-    def remove_corrupt_lines(self):
-        for line in list(self.chunk_lines):
-            if line.is_corrupt():
-                self.chunk_lines.remove(line)
