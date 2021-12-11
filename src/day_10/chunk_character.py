@@ -6,4 +6,9 @@ from dataclasses import dataclass
 class ChunkCharacter:
     opener: str
     closer: str
-    points: int
+    corrupt_points: int
+    
+    count: str = 0
+
+    def increment(self):
+        self.count += 1
