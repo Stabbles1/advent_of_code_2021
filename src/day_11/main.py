@@ -20,3 +20,6 @@ if __name__ == "__main__":
     lines = file_to_list("src/day_11/input")
     octopus_grid = input_to_octopus_grid(lines)
     print(octopus_grid.run_steps(100))
+    
+    octopus_grid = input_to_octopus_grid(lines)
+    print(octopus_grid.steps_until_all_flash())

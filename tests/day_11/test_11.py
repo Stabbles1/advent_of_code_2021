@@ -22,3 +22,7 @@ def test_input_to_octopus_grid():
 def test_part_1():
     octopus_grid = input_to_octopus_grid(test_input)
     assert octopus_grid.run_steps(100) == 1656
+
+def test_part_2():
+    octopus_grid = input_to_octopus_grid(test_input)
+    assert octopus_grid.steps_until_all_flash() == 195

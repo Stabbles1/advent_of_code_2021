@@ -31,6 +31,7 @@ class OctopusGrid:
         for row_offset, col_offset in list(itertools.product([-1, 0, 1], [-1, 0, 1])):
             try:
                 if row_index + row_offset >= 0 and col_index + col_offset >= 0:
+                    # This check prevents us wrapping around the lists
                     self.grid[row_index + row_offset][col_index + col_offset].increase_energy()
             except IndexError:
                 pass # There wasn't an octopus there
@@ -51,3 +52,10 @@ class OctopusGrid:
             total_flash_count += self.start_flashing()
             self.stop_flashing()
         return total_flash_count
+
+    def steps_until_all_flash(self):
+        for i in itertools.count(start=1):
+            self.increase_all_energy_levels()
+            if self.start_flashing() == len(self.grid) * len(self.grid[0]):
+                return i
+            self.stop_flashing()
