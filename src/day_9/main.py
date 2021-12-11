@@ -5,17 +5,17 @@ sys.path.insert(0, ".")
 from src.common.file_handling import file_to_list
 
 from height_map import HeightMap
-from height_point import HeightPoint
+from point import Point
 
 
 def input_to_height_map(raw_input: List[str]):
-    all_height_points = []
+    all_points = []
     for line in raw_input:
-        row_height_points = []
+        row_points = []
         for number in line:
-            row_height_points.append(HeightPoint(int(number)))
-        all_height_points.append(row_height_points)
-    return HeightMap(all_height_points)
+            row_points.append(Point(int(number)))
+        all_points.append(row_points)
+    return HeightMap(all_points)
 
 
 if __name__ == "__main__":

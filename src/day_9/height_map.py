@@ -1,14 +1,14 @@
 from typing import List
 
-from height_point import HeightPoint
+from point import Point
 from basin import Basin
 
 
 class HeightMap:
-    def __init__(self, height_points: List[List[HeightPoint]]):
-        self.points = height_points
-        self.map_height = len(height_points)
-        self.map_width = len(height_points[0])
+    def __init__(self, points: List[List[Point]]):
+        self.points = points
+        self.map_height = len(points)
+        self.map_width = len(points[0])
         self.basins = []
 
     def mark_basins(self):
@@ -19,39 +19,30 @@ class HeightMap:
                     self.basins.append(point.basin)
                     self.expand_basin(row_index, col_index, point.basin)
 
+    def get_checkable_directions(self, row_index, col_index):
+        # To handle locations around the edge of the map
+        checkable_directions = []
+        if row_index != 0:
+            checkable_directions.append((row_index - 1, col_index))
+        if row_index != self.map_height - 1:
+            checkable_directions.append((row_index + 1, col_index))
+        if col_index != 0:
+            checkable_directions.append((row_index, col_index - 1))
+        if col_index != self.map_width - 1:
+            checkable_directions.append((row_index, col_index + 1))
+        return checkable_directions
+
     def expand_basin(self, row_index, col_index, basin):
-        if row_index != 0:  # We should check above
+        for row_index_to_check, col_index_to_check in self.get_checkable_directions(
+            row_index, col_index
+        ):
             if (
-                self.points[row_index - 1][col_index].height < 9
-                and self.points[row_index - 1][col_index].basin is None
+                self.points[row_index_to_check][col_index_to_check].height < 9
+                and self.points[row_index_to_check][col_index_to_check].basin is None
             ):
                 basin.size += 1
-                self.points[row_index - 1][col_index].basin = basin
-                self.expand_basin(row_index - 1, col_index, basin)
-        if row_index != self.map_height - 1:  # We should check below
-            if (
-                self.points[row_index + 1][col_index].height < 9
-                and self.points[row_index + 1][col_index].basin is None
-            ):
-                basin.size += 1
-                self.points[row_index + 1][col_index].basin = basin
-                self.expand_basin(row_index + 1, col_index, basin)
-        if col_index != 0:  # We should check left
-            if (
-                self.points[row_index][col_index - 1].height < 9
-                and self.points[row_index][col_index - 1].basin is None
-            ):
-                basin.size += 1
-                self.points[row_index][col_index - 1].basin = basin
-                self.expand_basin(row_index, col_index - 1, basin)
-        if col_index != self.map_width - 1:  # We should check right
-            if (
-                self.points[row_index][col_index + 1].height < 9
-                and self.points[row_index][col_index + 1].basin is None
-            ):
-                basin.size += 1
-                self.points[row_index][col_index + 1].basin = basin
-                self.expand_basin(row_index, col_index + 1, basin)
+                self.points[row_index_to_check][col_index_to_check].basin = basin
+                self.expand_basin(row_index_to_check, col_index_to_check, basin)
 
     def multiply_largest_basins(self, top=3):
         total = 1
@@ -66,27 +57,11 @@ class HeightMap:
                 point.low_point = self.check_if_low_point(row_index, col_index)
 
     def check_if_low_point(self, row_index, col_index):
-        if row_index != 0:  # We should check above
+        for row_index_to_check, col_index_to_check in self.get_checkable_directions(
+            row_index, col_index
+        ):
             if (
-                self.points[row_index - 1][col_index].height
-                <= self.points[row_index][col_index].height
-            ):
-                return False
-        if row_index != self.map_height - 1:  # We should check below
-            if (
-                self.points[row_index + 1][col_index].height
-                <= self.points[row_index][col_index].height
-            ):
-                return False
-        if col_index != 0:  # We should check left
-            if (
-                self.points[row_index][col_index - 1].height
-                <= self.points[row_index][col_index].height
-            ):
-                return False
-        if col_index != self.map_width - 1:  # We should check right
-            if (
-                self.points[row_index][col_index + 1].height
+                self.points[row_index_to_check][col_index_to_check].height
                 <= self.points[row_index][col_index].height
             ):
                 return False

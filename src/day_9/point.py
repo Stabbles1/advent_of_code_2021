@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from basin import Basin
 
 @dataclass
-class HeightPoint():
+class Point():
     height: int
     low_point: bool = False
     basin: Basin = None
