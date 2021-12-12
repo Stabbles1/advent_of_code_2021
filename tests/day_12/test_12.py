@@ -1,5 +1,5 @@
 from day_12.cave_system import CaveSystem
-from day_12.cave import Cave, SmallCave
+from day_12.cave import Cave
 from day_12.main import input_to_populated_cave_system
 
 test_input = [

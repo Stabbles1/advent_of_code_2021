@@ -26,5 +26,4 @@ class CaveSystem:
                 journey_copy.append("end")
                 self.journeys.append(journey_copy)
             if cave.label.isupper() or cave.label not in journey_copy:
-                
                 self.find_all_routes(cave.label, journey_copy)
