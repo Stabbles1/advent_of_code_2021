@@ -22,3 +22,7 @@ if __name__ == "__main__":
     cave_system = input_to_populated_cave_system(lines)
     cave_system.find_all_routes("start", [])
     print(len(cave_system.journeys))
+
+    cave_system_part_2 = input_to_populated_cave_system(lines)
+    cave_system_part_2.find_all_routes_part_2("start", [])
+    print(len(cave_system_part_2.journeys))
