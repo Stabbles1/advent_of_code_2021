@@ -33,3 +33,4 @@ if __name__ == "__main__":
     for fold in folds:
         paper.fold(fold)
     print(len(paper.dots))
+    print(paper)
