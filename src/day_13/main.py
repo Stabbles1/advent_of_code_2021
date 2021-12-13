@@ -5,12 +5,15 @@ sys.path.insert(0, ".")
 from src.common.file_handling import file_to_list
 from paper import Paper
 from fold import Fold
+from dot import Dot
+
 
 def input_to_paper(input_dots):
     paper = Paper()
     for line in input_dots:
-        paper.add_dot(tuple(map(int, line.split(","))))
+        paper.add_dot(Dot(int(line.split(",")[0]), int(line.split(",")[1])))
     return paper
+
 
 def input_to_folds(input_folds):
     folds: Fold = []
@@ -26,7 +29,7 @@ if __name__ == "__main__":
     input_folds = file_to_list("src/day_13/input_folds")
     paper = input_to_paper(input_dots)
     folds = input_to_folds(input_folds)
-    
-    paper.fold(folds[0])
-    
+
+    for fold in folds:
+        paper.fold(fold)
     print(len(paper.dots))
